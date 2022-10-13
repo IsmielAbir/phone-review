@@ -10,15 +10,25 @@ displayPhone(data.data);
 const displayPhone = phones => {
     const phonesContainer = document.getElementById('phone-container');
     phonesContainer.innerHTML='';
-    phones=phones.slice(0,20);
 
-   /* const noPhone = document.getElementById('not-found');
-    if(phones.length === 0){
-        noPhone.remove('d-none');
+    const showAll = document.getElementById('show');
+    if(phones.length>10){
+    phones=phones.slice(0,10);
+    
+    showAll.classList.remove('d-none')
     }
     else{
-      noPhone.add('d-none')
-    }*/
+      showAll.classList.add('d-none')
+
+    }
+
+    const noPhone = document.getElementById('not-found');
+    if(phones.length === 0){
+        noPhone.classList.remove('d-none')
+    }
+    else{
+      noPhone.classList.add('d-none')
+    }
 
     phones.forEach(phone => {
 
@@ -42,17 +52,32 @@ const displayPhone = phones => {
         phonesContainer.appendChild(phoneDiv);
 
         
-    })
+    });
+    toggleSpinner(false)
 }
 
 
 document.getElementById('btn').addEventListener('click', function(){
+
+    toggleSpinner(true);
+
     const searchField = document.getElementById('field');
     const searchText = searchField.value;
     loadData(searchText);
     
     searchField.value='';
 })
+
+const toggleSpinner = isLoading => {
+  const loaderSection = document.getElementById('loader');
+  if(isLoading){
+    loaderSection.classList.remove('d-none')
+  }
+  else{
+    loaderSection.classList.add('d-none')
+
+  }
+}
 
 loadData();
 

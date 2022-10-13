@@ -8,15 +8,17 @@
     <link rel="stylesheet" href="frame/bootstrap.min.css">
 
     <style>
-      .c{
-        background-color: rgb(72, 235, 226);
+      .a{
+        text-align: center;
+        color: green;
+        font-weight: 800;
       }
     </style>
 </head>
 <body>
 
    <header>
-    <h1>Hey!!! Welcome in the Phone Review Website</h1>
+    <h1 class="a">Hey!!! Welcome in the Phone Review Website</h1>
    </header>
 
     <main id="container m-12">
@@ -32,10 +34,26 @@
                   <div id="phone-container" class="row row-cols-1 row-cols-md-3 g-4">
                 </div>
 
-                <div class="not-found m-4  d-none">
+                <div id="not-found" class="m-4  d-none">
                   <h2  class="text-warning">No phone found, please search again</h2>
 
                 </div>
+
+
+                <div id="show" class="text-center d-none">
+
+                  <div class="btn btn-primary">Show All</div>
+
+                </div>
+        </section>
+
+        <section id="loader" class="d-none">
+
+          <div style="height: 400px;" class="d-flex justify-content-center align-items-center">
+            <div class="spinner-border text-success" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
         </section>
 
 
