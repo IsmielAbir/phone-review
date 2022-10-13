@@ -43,7 +43,8 @@ const displayPhone = phones => {
                           }</h5>
                           <p class="card-text">${phone.slug
                           }</p>
-                        </div>
+                          <button onclick="loadPhoneDetails('${phone.slug}')" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ab">Show  Details</button>                        
+                          </div>
                       </div>
                     </div>
 
@@ -55,6 +56,19 @@ const displayPhone = phones => {
     });
     toggleSpinner(false)
 }
+
+document.getElementById('field').addEventListener('keypress', function(e){
+   if(e.key=='Enter'){
+    
+    toggleSpinner(true);
+
+    const searchField = document.getElementById('field');
+    const searchText = searchField.value;
+    loadData(searchText);
+    
+    searchField.value='';
+   }
+})
 
 
 document.getElementById('btn').addEventListener('click', function(){
@@ -79,5 +93,40 @@ const toggleSpinner = isLoading => {
   }
 }
 
-loadData();
+
+/*document.getElementById('show-all').addEventListener('click', function(){
+
+  toggleSpinner(true);
+
+    const searchField = document.getElementById('field');
+    const searchText = searchField.value;
+    loadData(searchText);
+    
+    searchField.value='';
+
+})*/
+
+const loadPhoneDetails= async id =>{
+   const url=`https://openapi.programming-hero.com/api/phone/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayPhoneDetails(data.data);
+}
+
+const displayPhoneDetails = phone =>{
+
+  const modal = document.getElementById('abLabel');
+  modal.innerHTML= `
+  <h4>${phone.name}</h4>
+  <h6>${phone.brand}</h6>
+  <p>${phone.releaseDate}</p>
+  <p>${phone.mainFeatures ? phone.mainFeatures.storage : 'No Storage Information'}</p>
+ 
+  `;
+
+
+}
+
+
+//loadData();
 
